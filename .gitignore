@@ -12,9 +12,9 @@ AMAZON/
 archive/
 deepglobe_processed/
 
-# Model checkpoints (too large)
-checkpoints*/
-*.pt
+# Model checkpoints
+# checkpoints*/  # Uncommented to allow uploading trained models
+# *.pt
 *.pth
 *.hdf5
 
