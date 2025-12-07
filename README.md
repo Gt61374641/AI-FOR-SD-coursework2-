@@ -1,36 +1,76 @@
-# MSc Data Science Dissertation/Project
+# Attention U-Net for Forest Segmentation
 
-**An Attention-Based U-Net for Detecting Deforestation Within Satellite Sensor Imagery.** 
-https://www.sciencedirect.com/science/article/pii/S0303243422000113
+PyTorch implementation of "An Attention-Based U-Net for Detecting Deforestation Within Satellite Sensor Imagery".
 
-## Datasets
-### Amazon 1 (Regular 3-dim Dataset) -- https://zenodo.org/record/3233081
-### Amazon 2 (Larger 4-band Amazon and Atlantic Datasets) -- https://zenodo.org/record/4498086#.YMh3GfKSmCU
+## Project Overview
 
-## Files
-+ **dataset** -- Folder of original dataset from Regular Dataset.
-+ **figures** -- Figures for report (amazon-atlantic-forest-mapjpg.jpg from https://pubmed.ncbi.nlm.nih.gov/20433744/).
-  + **shapefiles** -- Shapefiles for map. Amazon Shapefile from: (http://worldmap.harvard.edu/data/geonode:amapoly_ivb), rest from: (http://terrabrasilis.dpi.inpe.br/en/download-2/).
-+ **models** -- Folder of each of the three types of Attention U-Net model; load into Keras using 'load_model([modelfilename])'.
-+ **metrics** -- Folder of metrics (accuracy, precision, recall, F1-score) for each result.
-+ Experimentation.ipynb -- Jupyter notebook of data processing, augmentation, model training and testing.
-+ Figures.ipynb -- Jupyter notebook of figures found in **figures**.
-+ predictor.py -- Takes any input RGB or 4-band image and outputs Attention U-Net-predicted deforestation mask to file.
-+ preprocess-4band-amazon-data.py -- Python script to preprocess GeoTIFFs from 4-band Amazon Dataset and export as numpy pickles.
-+ preprocess-4band-atlantic-forest-data.py -- Python script to preprocess GeoTIFFs from 4-band Atlantic Forest Dataset and export as numpy pickles.
-+ preprocess-rgb-data.py -- Python script to preprocess data in RGB Dataset and export as numpy pickles.
-+ requirements.txt -- Required Python libraries.
+This project consists of two parts:
 
-## How to use
-### Obtaining Attention U-Net Deforestation Masks
-+ Run pip -r requirements.txt to install libraries.
-+ Download 'unet-attention-3d.hdf5', 'unet-attention-4d.hdf5' and 'unet-attention-4d-atlantic.hdf5' models, and place in same directory as script.
-+ Run 'python predictor.py [MODEL IDENTIFIER] [INPUT IMAGE PATH]' or 'python3 predictor.py [MODEL IDENTIFIER] [INPUT IMAGE PATH]'.
-  + Model identifier for RGB is 1, 4-band Amazon-trained is 2, 4-band Atlantic Forest-trained is 3.
-  + e.g. Get mask prediction of image named 'test.tif' from 4-band Amazon model: 'python predictor.py 2 test.tif'.
+### 1. Baseline Reproduction
+Reproduced the original paper's experiments using PyTorch (converted from TensorFlow/Keras). Trained Attention U-Net on the 4-band Amazon deforestation dataset.
 
-### Obtaining Pre-Processed Data
-+ Run pip -r requirements.txt to install libraries.
-+ Run 'preprocess-4band-amazon-data.py' to pre-process 4-band Amazon data.
-+ Run 'preprocess-4band-atlantic-forest-data.py' to pre-process 4-band Atlantic Forest data.
-+ Run 'preprocess-rgb-data.py' to pre-process RGB Amazon data.
+### 2. Contextual Adaptation
+Extended the model to the DeepGlobe Land Cover dataset for binary forest segmentation, demonstrating the model's applicability to different geographical contexts.
+
+## Results
+
+| Task | Dataset | Model | F1 Score | IoU |
+|------|---------|-------|----------|-----|
+| Baseline | Amazon 4-band | Attention U-Net | 94.85% | 90.25% |
+| Extension | DeepGlobe | Attention U-Net | 86.03% | 75.53% |
+
+## File Structure
+
+| File | Description |
+|------|-------------|
+| `train_pytorch.py` | Core module with model architectures (UNet, AttentionUNet, etc.) and utilities |
+| `train_4band_amazon.py` | Training script for 4-band Amazon dataset (baseline) |
+| `train_deepglobe.py` | Training script for DeepGlobe dataset (extension) |
+| `preprocess_deepglobe.py` | Preprocess DeepGlobe: convert 7-class to binary forest segmentation |
+| `predict_pytorch.py` | Generate predictions using trained models |
+| `requirements_pytorch.txt` | Python dependencies |
+
+## Installation
+
+```bash
+# Install PyTorch (CUDA 12.8)
+pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+
+# Install other dependencies
+pip install numpy pillow tqdm scikit-learn rasterio matplotlib
+```
+
+## Usage
+
+### Baseline Reproduction (Amazon 4-band)
+
+```bash
+# Train
+python train_4band_amazon.py --model attention_unet --epochs 50 --batch_size 16 --device cuda
+
+# Predict
+python predict_pytorch.py --model attention_unet --checkpoint ./checkpoints_4band/attention_unet_4band_best.pt --input ./AMAZON/Test/image --output ./predictions_4band/ --in_channels 4 --base 16 --device cuda
+```
+
+### Contextual Adaptation (DeepGlobe)
+
+```bash
+# Step 1: Preprocess data
+python preprocess_deepglobe.py
+
+# Step 2: Train
+python train_deepglobe.py --model attention_unet --base 32 --augment --scheduler --epochs 50 --batch_size 16 --patience 10 --device cuda
+
+# Step 3: Predict
+python predict_pytorch.py --model attention_unet --checkpoint ./checkpoints_deepglobe/attention_unet_deepglobe_best.pt --input ./deepglobe_processed/test/images --output ./predictions_deepglobe/ --in_channels 3 --base 32 --device cuda
+```
+
+## References
+
+### Original Paper & Code
+- Paper: [An Attention-Based U-Net for Detecting Deforestation Within Satellite Sensor Imagery](https://www.sciencedirect.com/science/article/pii/S0303243422000113)
+- Original Code (TensorFlow): https://github.com/davej23/attention-mechanism-unet
+
+### Datasets
+- Amazon 4-band Dataset: https://zenodo.org/record/4498086
+- DeepGlobe Land Cover: https://www.kaggle.com/datasets/balraj98/deepglobe-land-cover-classification-dataset

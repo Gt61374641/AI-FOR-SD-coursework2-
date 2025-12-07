@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+.env
+
+# Data (too large for GitHub)
+AMAZON/
+archive/
+deepglobe_processed/
+
+# Model checkpoints (too large)
+checkpoints*/
+*.pt
+*.pth
+*.hdf5
+
+# Predictions
+predictions*/
+*.npy
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+Experimentation.ipynb
+
+# PDF
+*.pdf
+

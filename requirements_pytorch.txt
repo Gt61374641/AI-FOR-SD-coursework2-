@@ -1,0 +1,9 @@
+# Pytorch requirements
+torch
+torchvision
+numpy
+pillow
+tqdm
+scikit-learn
+rasterio
+matplotlib
