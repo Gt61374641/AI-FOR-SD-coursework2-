@@ -35,6 +35,18 @@ Extended the Attention U-Net model to the DeepGlobe Land Cover dataset for binar
 | FCN32-VGG16 | Fully Convolutional Network with VGG16 backbone |
 | ResUNet | U-Net with residual blocks for better gradient flow |
 
+## Trained Model Checkpoints
+
+| Model | Checkpoint | Size | Available |
+|-------|------------|------|-----------|
+| Attention U-Net | `checkpoints_4band/attention_unet_4band_best.pt` | 7.6 MB | ✅ |
+| U-Net | `checkpoints_4band/unet_4band_best.pt` | 30 MB | ✅ |
+| ResNet50-SegNet | `checkpoints_4band/resnet50_segnet_4band_best.pt` | 24 MB | ✅ |
+| FCN32-VGG16 | `checkpoints_4band/fcn32_vgg16_4band_best.pt` | 512 MB | ❌ |
+| ResUNet | `checkpoints_4band/resunet_4band_best.pt` | 31 MB | ✅ |
+
+> **Note:** FCN32-VGG16 checkpoint (512 MB) exceeds GitHub's 100 MB file size limit and is not included in this repository. To obtain this checkpoint, please train the model locally using the provided training script.
+
 ## File Structure
 
 | File | Description |
