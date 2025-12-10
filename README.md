@@ -7,25 +7,38 @@ PyTorch implementation of "An Attention-Based U-Net for Detecting Deforestation 
 This project consists of two parts:
 
 ### 1. Baseline Reproduction
-Reproduced the original paper's experiments using PyTorch (converted from TensorFlow/Keras). Implemented and trained **all five models** from the original paper on the 4-band Amazon deforestation dataset:
+Reproduced the original paper's Attention U-Net model using PyTorch (converted from TensorFlow/Keras) on the **Amazon 4-band deforestation dataset**. The original paper focused on detecting deforestation in the Brazilian Amazon rainforest using multi-spectral satellite imagery (R, G, B, NIR bands).
 
+### 2. Contextual Adaptation
+Extended the Attention U-Net model to the **DeepGlobe Land Cover dataset** for binary forest segmentation. DeepGlobe provides high-resolution satellite imagery covering diverse global regions, including **rural areas in Southeast Asia, Africa, and other developing regions** where forest monitoring is critical for sustainable development. This extension demonstrates the model's applicability to different geographical contexts beyond the Amazon.
+
+### Implemented Models (Baseline)
+All five models from the original paper were implemented and trained:
 - **Attention U-Net** (Main contribution of the paper)
 - U-Net
 - ResNet50-SegNet
 - FCN32-VGG16
 - ResUNet
 
-### 2. Contextual Adaptation
-Extended the Attention U-Net model to the DeepGlobe Land Cover dataset for binary forest segmentation, demonstrating the model's applicability to different geographical contexts.
-
 ## Results
 
-| Task | Dataset | Model | F1 Score | IoU |
-|------|---------|-------|----------|-----|
-| Baseline | Amazon 4-band | Attention U-Net | 94.85% | 90.25% |
-| Extension | DeepGlobe | Attention U-Net | 86.03% | 75.53% |
+### Baseline Results (Amazon 4-band Dataset)
+| Model | F1 Score | IoU |
+|-------|----------|-----|
+| **Attention U-Net** | 94.85% | 90.25% |
+| U-Net | 95.83% | 92.03% |
+| ResNet50-SegNet | 90.68% | 82.98% |
+| FCN32-VGG16 | 89.08% | 80.36% |
+| ResUNet | 95.24% | 90.99% |
 
-## Implemented Models
+### Contextual Adaptation Results (DeepGlobe Dataset)
+| Model | F1 Score | IoU |
+|-------|----------|-----|
+| **Attention U-Net** | 86.03% | 75.53% |
+
+> The ~9% F1 score drop from Amazon to DeepGlobe indicates domain shift challenges when applying models across different geographical contexts.
+
+## Model Descriptions
 
 | Model | Description |
 |-------|-------------|
