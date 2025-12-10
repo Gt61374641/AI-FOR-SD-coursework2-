@@ -10,7 +10,7 @@ This project consists of two parts:
 Reproduced the original paper's Attention U-Net model using PyTorch (converted from TensorFlow/Keras) on the **Amazon 4-band deforestation dataset**. The original paper focused on detecting deforestation in the Brazilian Amazon rainforest using multi-spectral satellite imagery (R, G, B, NIR bands).
 
 ### 2. Contextual Adaptation
-Extended the Attention U-Net model to the **DeepGlobe Land Cover dataset** for binary forest segmentation. DeepGlobe provides high-resolution satellite imagery covering diverse global regions, including rural areas in Southeast Asia where forest monitoring is critical for sustainable development. This extension demonstrates the model's applicability to different geographical contexts beyond the Amazon.
+Extended the Attention U-Net model to the **DeepGlobe Land Cover dataset** for binary forest segmentation. DeepGlobe provides high-resolution satellite imagery covering diverse global regions, including **rural areas in Southeast Asia, Africa, and other developing regions** where forest monitoring is critical for sustainable development. This extension demonstrates the model's applicability to different geographical contexts beyond the Amazon.
 
 ### Implemented Models (Baseline)
 All five models from the original paper were implemented and trained:
@@ -19,24 +19,6 @@ All five models from the original paper were implemented and trained:
 - ResNet50-SegNet
 - FCN32-VGG16
 - ResUNet
-
-## Results
-
-### Baseline Results (Amazon 4-band Dataset)
-| Model | F1 Score | IoU |
-|-------|----------|-----|
-| **Attention U-Net** | 94.85% | 90.25% |
-| U-Net | 95.83% | 92.03% |
-| ResNet50-SegNet | 90.68% | 82.98% |
-| FCN32-VGG16 | 89.08% | 80.36% |
-| ResUNet | 95.24% | 90.99% |
-
-### Contextual Adaptation Results (DeepGlobe Dataset)
-| Model | F1 Score | IoU |
-|-------|----------|-----|
-| **Attention U-Net** | 86.03% | 75.53% |
-
-> The ~9% F1 score drop from Amazon to DeepGlobe indicates domain shift challenges when applying models across different geographical contexts.
 
 ## Model Descriptions
 
