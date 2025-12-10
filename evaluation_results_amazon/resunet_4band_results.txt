@@ -1,0 +1,13 @@
+Model: resunet (4-band)
+Batch Size: 16
+Learning Rate: 0.0001
+Random Seed: 42
+
+Best Val F1: 97.37% (Epoch 45)
+
+Test Results:
+  Accuracy:  95.56%
+  Precision: 99.07%
+  Recall:    91.85%
+  F1 Score:  95.24%
+  IoU:       90.99%

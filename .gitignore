@@ -38,4 +38,4 @@ Experimentation.ipynb
 # PDF
 *.pdf
 
-"checkpoints_4band/fcn32_vgg16_4band_best.pt" 
+checkpoints_4band/fcn32_vgg16_4band_best.pt

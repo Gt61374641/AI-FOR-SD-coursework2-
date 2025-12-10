@@ -1,0 +1,13 @@
+Model: fcn32_vgg16 (4-band)
+Batch Size: 16
+Learning Rate: 0.0001
+Random Seed: 42
+
+Best Val F1: 90.99% (Epoch 48)
+
+Test Results:
+  Accuracy:  89.58%
+  Precision: 91.76%
+  Recall:    86.68%
+  F1 Score:  89.08%
+  IoU:       80.36%

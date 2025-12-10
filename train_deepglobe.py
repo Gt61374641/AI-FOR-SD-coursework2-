@@ -274,7 +274,7 @@ def main():
     print(f"  IoU:       {test_m['iou']*100:.2f}%")
     
     # Save results to file
-    results_dir = "./evaluation_results"
+    results_dir = "./evaluation_results_deepglobe"
     os.makedirs(results_dir, exist_ok=True)
     with open(os.path.join(results_dir, f"deepglobe_{args.model}_results.txt"), 'w') as f:
         f.write(f"Model: {args.model}\nBase: {args.base}\nBatch Size: {args.batch_size}\n")

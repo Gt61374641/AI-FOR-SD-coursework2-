@@ -1,0 +1,13 @@
+Model: resnet50_segnet (4-band)
+Batch Size: 16
+Learning Rate: 0.0001
+Random Seed: 42
+
+Best Val F1: 92.06% (Epoch 49)
+
+Test Results:
+  Accuracy:  91.13%
+  Precision: 93.80%
+  Recall:    87.86%
+  F1 Score:  90.68%
+  IoU:       82.98%

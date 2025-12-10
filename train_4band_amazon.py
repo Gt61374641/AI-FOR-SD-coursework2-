@@ -290,7 +290,7 @@ def main():
     print(f"  IoU:       {test_m['iou']*100:.2f}%")
     
     # Save results to file
-    results_dir = "./evaluation_results_4band"
+    results_dir = "./evaluation_results_amazon"
     os.makedirs(results_dir, exist_ok=True)
     with open(os.path.join(results_dir, f"{args.model}_4band_results.txt"), 'w') as f:
         f.write(f"Model: {args.model} (4-band)\n")
