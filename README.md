@@ -10,7 +10,7 @@ This project consists of two parts:
 Reproduced the original paper's Attention U-Net model using PyTorch (converted from TensorFlow/Keras) on the **Amazon 4-band deforestation dataset**. The original paper focused on detecting deforestation in the Brazilian Amazon rainforest using multi-spectral satellite imagery (R, G, B, NIR bands).
 
 ### 2. Contextual Adaptation
-Extended the Attention U-Net model to the **DeepGlobe Land Cover dataset** for binary forest segmentation. DeepGlobe provides high-resolution satellite imagery covering diverse global regions, including **rural areas in Southeast Asia, Africa, and other developing regions** where forest monitoring is critical for sustainable development. This extension demonstrates the model's applicability to different geographical contexts beyond the Amazon.
+Extended the Attention U-Net model to the **DeepGlobe Land Cover dataset** for binary forest segmentation. DeepGlobe provides high-resolution satellite imagery covering diverse global regions, including rural areas in Southeast Asia where forest monitoring is critical for sustainable development. This extension demonstrates the model's applicability to different geographical contexts beyond the Amazon.
 
 ### Implemented Models (Baseline)
 All five models from the original paper were implemented and trained:
